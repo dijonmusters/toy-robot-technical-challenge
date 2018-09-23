@@ -1,0 +1,11 @@
+/Users/jon/repos/toy-robot/ToyRobot/bin/Debug/netcoreapp2.0/ToyRobot.deps.json
+/Users/jon/repos/toy-robot/ToyRobot/bin/Debug/netcoreapp2.0/ToyRobot.runtimeconfig.json
+/Users/jon/repos/toy-robot/ToyRobot/bin/Debug/netcoreapp2.0/ToyRobot.runtimeconfig.dev.json
+/Users/jon/repos/toy-robot/ToyRobot/bin/Debug/netcoreapp2.0/ToyRobot.dll
+/Users/jon/repos/toy-robot/ToyRobot/bin/Debug/netcoreapp2.0/ToyRobot.pdb
+/Users/jon/repos/toy-robot/ToyRobot/obj/Debug/netcoreapp2.0/ToyRobot.csprojAssemblyReference.cache
+/Users/jon/repos/toy-robot/ToyRobot/obj/Debug/netcoreapp2.0/ToyRobot.csproj.CoreCompileInputs.cache
+/Users/jon/repos/toy-robot/ToyRobot/obj/Debug/netcoreapp2.0/ToyRobot.AssemblyInfoInputs.cache
+/Users/jon/repos/toy-robot/ToyRobot/obj/Debug/netcoreapp2.0/ToyRobot.AssemblyInfo.cs
+/Users/jon/repos/toy-robot/ToyRobot/obj/Debug/netcoreapp2.0/ToyRobot.dll
+/Users/jon/repos/toy-robot/ToyRobot/obj/Debug/netcoreapp2.0/ToyRobot.pdb
