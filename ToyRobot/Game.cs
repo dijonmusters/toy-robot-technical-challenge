@@ -5,9 +5,12 @@ namespace ToyRobotConsole
 {
     public class Game
     {
-        List<Cell> _map;
-        Robot _robot;
-        bool _playing;
+        private List<Cell> _map;
+        private Robot _robot;
+        public Robot Robot { get { return _robot; } }
+        private bool _playing;
+
+        private CommandProcessor _commandProcessor;
 
         public Game(int dim_x, int dim_y)
         {
@@ -20,6 +23,7 @@ namespace ToyRobotConsole
                 }
             }
             _robot = new Robot(_map);
+            _commandProcessor = new CommandProcessor(this);
         }
 
         public Game() : this(5, 5)
@@ -33,10 +37,7 @@ namespace ToyRobotConsole
             {
                 Console.Write("What would you like to do? ");
                 string command = Console.ReadLine();
-                if (command.ToUpper() == "REPORT")
-                    _robot.Report();
-                if (command.ToUpper() == "QUIT")
-                    Stop();
+                _commandProcessor.Execute(command);
             }
             Console.WriteLine("Thanks for playing!");
         }
