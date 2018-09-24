@@ -6,6 +6,7 @@ namespace ToyRobotConsole
     public class Game
     {
         List<Cell> _map;
+        Robot _robot;
         bool _playing;
 
         public Game(int dim_x, int dim_y)
@@ -18,7 +19,11 @@ namespace ToyRobotConsole
                     _map.Add(new Cell(x, y));
                 }
             }
+            _robot = new Robot(_map);
         }
+
+        public Game() : this(5, 5)
+        {}
 
         public void Start()
         {
@@ -26,8 +31,12 @@ namespace ToyRobotConsole
             _playing = true;
             while (_playing)
             {
+                Console.Write("What would you like to do? ");
                 string command = Console.ReadLine();
-                Console.WriteLine(command);
+                if (command.ToUpper() == "REPORT")
+                    _robot.Report();
+                if (command.ToUpper() == "QUIT")
+                    Stop();
             }
             Console.WriteLine("Thanks for playing!");
         }
