@@ -12,6 +12,17 @@ namespace ToyRobotConsole
             _game = game;
         }
 
+        private string Help()
+        {
+            return "I'm not sure how to process that command. Try one of these:\n"
+                + "PLACE 0,0,NORTH\n"
+                + "MOVE\n"
+                + "LEFT\n"
+                + "RIGHT\n"
+                + "REPORT\n"
+                + "QUIT";
+        }
+
         private void Place(string command)
         {
             int firstParamIndex = command.IndexOf(" ") + 1;
@@ -55,7 +66,7 @@ namespace ToyRobotConsole
                         _game.Stop();
                         break;
                     default:
-                        Console.WriteLine("I'm not sure how to process that command.");
+                        Console.WriteLine(Help());
                         break;
                 }
             }
