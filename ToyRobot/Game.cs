@@ -28,6 +28,8 @@ namespace ToyRobotConsole
         /// <summary>Private field for the game's command processor.</summary>
         private CommandProcessor _commandProcessor;
 
+        private UserInterface _ui;
+
         /// <summary>Game constructor</summary>
         /// <param name="dim_x">An int parameter for the width of the map</param>
         /// <param name="dim_y">An int parameter for the height of the map</param>
@@ -43,6 +45,7 @@ namespace ToyRobotConsole
             }
             _robot = new Robot(_map);
             _commandProcessor = new CommandProcessor(this);
+            _ui = new UserInterface(this);
         }
 
         /// <summary>
@@ -62,6 +65,7 @@ namespace ToyRobotConsole
                 Console.Write("What would you like to do? ");
                 string command = Console.ReadLine();
                 _commandProcessor.Execute(command);
+                _ui.PrintGrid();
             }
             Console.WriteLine("Thanks for playing!");
         }

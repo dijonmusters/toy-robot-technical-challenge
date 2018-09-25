@@ -154,6 +154,11 @@ namespace ToyRobotConsole
             return _active;
         }
 
+        public bool IsLocated(Cell location)
+        {
+            return _location == location;
+        }
+
         /// <summary>Moves the robot one cell north</summary>
         private void MoveNorth()
         {
