@@ -57,5 +57,19 @@ namespace ToyRobotConsole
             grid += GridBorder();
             Console.WriteLine(grid);
         }
+
+        public string AskUser(string question)
+        {
+            Console.Write(question);
+            return Console.ReadLine();
+        }
+
+        public void PrintMessage(string message)
+        {
+            string formattedMessage = message.Replace("\n", "\n# ");
+            Console.WriteLine("\n#########");
+            Console.WriteLine($"# {formattedMessage}");
+            Console.WriteLine("#########\n");
+        }
     }
 }

@@ -31,7 +31,12 @@ namespace ToyRobotConsole
         /// <summary>Private field for the game's command processor.</summary>
         private CommandProcessor _commandProcessor;
 
+        /// <summary>Private field for the game's user interface.</summary>
         private UserInterface _ui;
+
+        /// <summary>Public read-only property to expose the user interface.</summary>
+        /// <value>Gets the value of the game's user interface</value>
+        public UserInterface UI { get { return _ui; } }
 
         /// <summary>Game constructor</summary>
         /// <param name="dim_x">An int parameter for the width of the map</param>
@@ -46,7 +51,7 @@ namespace ToyRobotConsole
                     _map.Add(new Cell(x, y));
                 }
             }
-            _robot = new Robot(_map);
+            _robot = new Robot(this);
             _commandProcessor = new CommandProcessor(this);
             _ui = new UserInterface(this);
             _gui = false;
@@ -62,20 +67,18 @@ namespace ToyRobotConsole
         /// <summary>Begins the game and manages the game loop</summary>
         public void Start()
         {
-            Console.WriteLine("Welcome to the Toy Robot simulator!");
-            Console.Write("Would you like a GUI? ");
-            string input = Console.ReadLine().ToUpper();
+            _ui.PrintMessage("Welcome to the Toy Robot simulator!");
+            string input = _ui.AskUser("Would you like a GUI? ").ToUpper();
             _gui = input == "Y" || input == "YES" || input == "T" || input == "TRUE";
             _playing = true;
             while (_playing)
             {
                 if (_gui)
                     _ui.PrintGrid();
-                Console.Write("What would you like to do? ");
-                string command = Console.ReadLine();
+                string command = _ui.AskUser("What would you like to do? ");
                 _commandProcessor.Execute(command);
             }
-            Console.WriteLine("Thanks for playing!");
+            _ui.PrintMessage("Thanks for playing!");
         }
 
         /// <summary>Ends the game</summary>
