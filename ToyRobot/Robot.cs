@@ -67,12 +67,28 @@ namespace ToyRobotConsole
 
         public void Left()
         {
-            Console.WriteLine("Turning robot left");
+            if (IsReady())
+            {
+                Direction last = (Direction) Enum.GetValues(typeof(Direction)).Length - 1;
+                _direction--;
+                if (_direction < 0)
+                    _direction = last;
+            }
+            else
+                Console.WriteLine("Please place the robot first");
         }
 
         public void Right()
         {
-            Console.WriteLine("Turning robot right");
+            if (IsReady())
+            {
+                Direction last = (Direction) Enum.GetValues(typeof(Direction)).Length - 1;
+                _direction++;
+                if (_direction > last)
+                    _direction = 0;
+            }
+            else
+                Console.WriteLine("Please place the robot first");
         }
 
         private void Activate()
