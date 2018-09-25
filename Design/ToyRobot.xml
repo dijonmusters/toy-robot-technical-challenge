@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ToyRobot</name>
+    </assembly>
+    <members>
+        <member name="T:ToyRobotConsole.Cell">
+            <summary>A Cell is a single location containing an x and y coordinate.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Cell._x">
+            <summary>Private field for x coordinate.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Cell._y">
+            <summary>Private field y coordinate.</summary>
+        </member>
+        <member name="P:ToyRobotConsole.Cell.X">
+            <summary>Read-only property for x coordinate.</summary>
+            <value>Gets the value of x coordinate</value>
+        </member>
+        <member name="P:ToyRobotConsole.Cell.Y">
+            <summary>Read-only property for y coordinate.</summary>
+            <value>Gets the value of y coordinate</value>
+        </member>
+        <member name="M:ToyRobotConsole.Cell.#ctor(System.Int32,System.Int32)">
+            <summary>Cell constructor</summary>
+            <param name="x">An int parameter for the Cell's x coordinate</param>
+            <param name="y">An int parameter for the Cell's y coordinate</param>
+        </member>
+        <member name="T:ToyRobotConsole.CommandProcessor">
+            <summary>
+            The CommandProcessor class takes a command string, validates that it contains known commands
+            and manages propagation of commands to the correct game elements.
+            </summary>
+        </member>
+        <member name="F:ToyRobotConsole.CommandProcessor._game">
+            <summary>Private field for game.</summary>
+        </member>
+        <member name="M:ToyRobotConsole.CommandProcessor.#ctor(ToyRobotConsole.Game)">
+            <summary>Command Processor constructor</summary>
+            <param name="game">A game parameter to manage command propagation</param>
+        </member>
+        <member name="M:ToyRobotConsole.CommandProcessor.Help">
+            <summary>Provides a list of suggestions for known commands</summary>
+            <returns>A string representation of a list of known commands</returns>
+        </member>
+        <member name="M:ToyRobotConsole.CommandProcessor.Place(System.String)">
+            <summary>Validates the remaining command string and propagates to robot</summary>
+            <param name="command">A string containing the parameters of the place command</param>
+        </member>
+        <member name="M:ToyRobotConsole.CommandProcessor.Execute(System.String)">
+            <summary>Validates the command string and propagates to appropriate game object</summary>
+            <param name="command">A string containing the command</param>
+        </member>
+        <member name="T:ToyRobotConsole.Game">
+            <summary>The Game class manages the game world.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Game._map">
+            <summary>
+            Private field for the list of Cells that make up the game map.
+            </summary>
+        </member>
+        <member name="P:ToyRobotConsole.Game.Map">
+            <summary>Public read-only property to expose the game's map.</summary>
+            <value>Gets the value of the game's map</value>
+        </member>
+        <member name="F:ToyRobotConsole.Game._robot">
+            <summary>Private field for the game's robot.</summary>
+        </member>
+        <member name="P:ToyRobotConsole.Game.Robot">
+            <summary>Public read-only property to expose the robot.</summary>
+            <value>Gets the value of the game's robot</value>
+        </member>
+        <member name="F:ToyRobotConsole.Game._playing">
+            <summary>Private field for the game's playing state.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Game._commandProcessor">
+            <summary>Private field for the game's command processor.</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Game.#ctor(System.Int32,System.Int32)">
+            <summary>Game constructor</summary>
+            <param name="dim_x">An int parameter for the width of the map</param>
+            <param name="dim_y">An int parameter for the height of the map</param>
+        </member>
+        <member name="M:ToyRobotConsole.Game.#ctor">
+            <summary>
+            Game default constructor
+            Calls overloaded constructor and passes in default dimensions (5x5)
+            </summary>
+        </member>
+        <member name="M:ToyRobotConsole.Game.Start">
+            <summary>Begins the game and manages the game loop</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Game.Stop">
+            <summary>Ends the game</summary>
+        </member>
+        <member name="T:ToyRobotConsole.Direction">
+            <summary>The Direction enum contains a list of valid robot directions.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Direction.NORTH">
+            <summary>Facing north direction.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Direction.EAST">
+            <summary>Facing east direction.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Direction.SOUTH">
+            <summary>Facing south direction.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Direction.WEST">
+            <summary>Facing west direction.</summary>
+        </member>
+        <member name="T:ToyRobotConsole.Robot">
+            <summary>The Robot class contains the functionality for the game's robot.</summary>
+        </member>
+        <member name="T:ToyRobotConsole.Robot.Warning">
+            <summary>The Warning enum contains a list of known warning messages.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Robot.Warning.INACTIVE">
+            <summary>The robot is inactive.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Robot.Warning.BOUNDARY">
+            <summary>The requested location is outside the boundary.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Robot.Warning.PLACE">
+            <summary>The requested location or direction does not exist.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Robot._map">
+            <summary>Private field for map reference.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Robot._location">
+            <summary>Private field for robot's current location.</summary>
+        </member>
+        <member name="P:ToyRobotConsole.Robot.Location">
+            <summary>Public read-only property to expose the robot's location.</summary>
+            <value>Gets the value of the robot's location</value>
+        </member>
+        <member name="F:ToyRobotConsole.Robot._direction">
+            <summary>Private field for robot's current direction.</summary>
+        </member>
+        <member name="P:ToyRobotConsole.Robot.Direction">
+            <summary>Public read-only property to expose the robot's direction.</summary>
+            <value>Gets the value of the robot's direction</value>
+        </member>
+        <member name="F:ToyRobotConsole.Robot._active">
+            <summary>Private field for robot's active status.</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.#ctor(System.Collections.Generic.List{ToyRobotConsole.Cell})">
+            <summary>Robot constructor.</summary>
+            <param name="map">A Map parameter to manage robot's location</param>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.Place(System.Int32,System.Int32,ToyRobotConsole.Direction)">
+            <summary>Places the robot in a location on the map and sets the direction.</summary>
+            <param name="x">An int parameter that represents an x coordinate</param>
+            <param name="y">An int parameter that represents a y coordinate</param>
+            <param name="direction">A Direction parameter to represent robot's direction</param>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.Report">
+            <summary>Prints out the robot's current location and direction.</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.Move">
+            <summary>Calculates which way the robot needs to move.</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.Left">
+            <summary>Rotates the robot to the left</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.Right">
+            <summary>Rotates the robot to the right</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.Activate">
+            <summary>Activates the robot so it can process commands</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.IsReady">
+            <summary>Checks if the robot is ready</summary>
+            <returns>A boolean value representing the active status of the robot</returns>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.MoveNorth">
+            <summary>Moves the robot one cell north</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.MoveEast">
+            <summary>Moves the robot one cell east</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.MoveSouth">
+            <summary>Moves the robot one cell south</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.MoveWest">
+            <summary>Moves the robot one cell west</summary>
+        </member>
+        <member name="M:ToyRobotConsole.Robot.PrintWarning(ToyRobotConsole.Robot.Warning)">
+            <summary>Prints a known warning to the console</summary>
+            <param name="warning">
+            A Warning parameter for the type of warning to be displayed
+            </param>
+        </member>
+    </members>
+</doc>
