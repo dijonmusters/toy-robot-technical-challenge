@@ -35,7 +35,7 @@ namespace ToyRobotConsole
 
         public void Report()
         {
-            if (_active)
+            if (IsReady())
                 Console.WriteLine($"{_location.X},{_location.Y},{_direction}");
             else
                 Console.WriteLine("Please place the robot first");
@@ -43,7 +43,26 @@ namespace ToyRobotConsole
 
         public void Move()
         {
-            Console.WriteLine("Moving the robot");
+            if (!IsReady())
+                Console.WriteLine("Please place the robot first");
+            else
+            {
+                switch (_direction)
+                {
+                    case Direction.NORTH:
+                        MoveNorth();
+                        break;
+                    case Direction.SOUTH:
+                        MoveSouth();
+                        break;
+                    case Direction.EAST:
+                        MoveEast();
+                        break;
+                    case Direction.WEST:
+                        MoveWest();
+                        break;
+                }
+            }
         }
 
         public void Left()
@@ -59,6 +78,49 @@ namespace ToyRobotConsole
         private void Activate()
         {
             _active = true;
+        }
+
+        private bool IsReady()
+        {
+            return _active;
+        }
+
+        private void MoveNorth()
+        {
+            Cell location = _map.Find(c => c.X == _location.X && c.Y == _location.Y + 1);
+            if (location != null)
+                _location = location;
+            else
+                PrintWarning();
+        }
+        private void MoveSouth()
+        {
+            Cell location = _map.Find(c => c.X == _location.X && c.Y == _location.Y - 1);
+            if (location != null)
+                _location = location;
+            else
+                PrintWarning();
+        }
+        private void MoveEast()
+        {
+            Cell location = _map.Find(c => c.X == _location.X + 1 && c.Y == _location.Y);
+            if (location != null)
+                _location = location;
+            else
+                PrintWarning();
+        }
+        private void MoveWest()
+        {
+            Cell location = _map.Find(c => c.X == _location.X - 1 && c.Y == _location.Y);
+            if (location != null)
+                _location = location;
+            else
+                PrintWarning();
+        }
+
+        private void PrintWarning()
+        {
+            Console.WriteLine("Whoa! Careful! You nearly fell off!");
         }
     }
 }
