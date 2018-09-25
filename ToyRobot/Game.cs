@@ -11,6 +11,10 @@ namespace ToyRobotConsole
         /// </summary>
         private List<Cell> _map;
 
+        /// <summary>Public read-only property to expose the game's map.</summary>
+        /// <value>Gets the value of the game's map</value>
+        public List<Cell> Map { get { return _map; } }
+
         /// <summary>Private field for the game's robot.</summary>
         private Robot _robot;
 

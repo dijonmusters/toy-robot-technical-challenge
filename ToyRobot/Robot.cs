@@ -36,8 +36,16 @@ namespace ToyRobotConsole
         /// <summary>Private field for robot's current location.</summary>
         private Cell _location;
 
+        /// <summary>Public read-only property to expose the robot's location.</summary>
+        /// <value>Gets the value of the robot's location</value>
+        public Cell Location { get { return _location; } }
+
         /// <summary>Private field for robot's current direction.</summary>
         private Direction _direction;
+
+        /// <summary>Public read-only property to expose the robot's direction.</summary>
+        /// <value>Gets the value of the robot's direction</value>
+        public Direction Direction { get { return _direction; } }
 
         /// <summary>Private field for robot's active status.</summary>
         private bool _active;
@@ -48,6 +56,7 @@ namespace ToyRobotConsole
         {
             _map = map;
             _active = false;
+            _direction = (Direction) -1;
         }
 
         /// <summary>Places the robot in a location on the map and sets the direction.</summary>
@@ -56,9 +65,11 @@ namespace ToyRobotConsole
         /// <param name="direction">A Direction parameter to represent robot's direction</param>
         public void Place(int x, int y, Direction direction)
         {
+            Direction last = (Direction) Enum.GetValues(typeof(Direction)).Length - 1;
+            bool directionIsValid = direction >= 0 && direction <= last;
             Cell location = _map.Find(c => c.X == x && c.Y == y);
 
-            if (location != null)
+            if (location != null && directionIsValid)
             {
                 _location = location;
                 _direction = direction;
@@ -138,7 +149,7 @@ namespace ToyRobotConsole
 
         /// <summary>Checks if the robot is ready</summary>
         /// <returns>A boolean value representing the active status of the robot</returns>
-        private bool IsReady()
+        public bool IsReady()
         {
             return _active;
         }

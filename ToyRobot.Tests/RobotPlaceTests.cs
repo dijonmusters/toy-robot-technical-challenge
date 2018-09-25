@@ -3,7 +3,7 @@ using ToyRobotConsole;
 
 namespace Tests
 {
-    public class Tests
+    public class RobotPlaceTests
     {
         private Game _game;
         private Robot _robot;
@@ -11,7 +11,7 @@ namespace Tests
         public void Setup()
         {
             _game = new Game();
-            _robot = new Robot(_game);
+            _robot = new Robot(_game.Map);
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace Tests
         public void InactiveRobotIgnoresCommands()
         {
             _robot.Move();
-            Cell actual = _robot.Location();
+            Cell actual = _robot.Location;
             Assert.IsNull(actual, $"{actual} should be Null");
         }
 
@@ -56,19 +56,18 @@ namespace Tests
             _robot.Place(100, 100, direction);
             bool actual = _robot.IsReady();
             Assert.IsFalse(actual, $"{actual} should be False");
-            Assert.IsNull(_robot.Location. "Robot location should be null");
-            Assert.IsNull(_robot.Direction. "Robot direction should be null");
+            Assert.IsNull(_robot.Location, "Robot location should be null");
+            Assert.AreEqual((int)_robot.Direction, -1, "Robot direction should be -1");
         }
 
         [Test]
         public void InvalidPlaceRobotDirection()
         {
-            Direction direction = Direction.SILLY;
-            _robot.Place(0, 0, direction);
+            _robot.Place(0, 0, (Direction) 100);
             bool actual = _robot.IsReady();
             Assert.IsFalse(actual, $"{actual} should be False");
-            Assert.IsNull(_robot.Location. "Robot location should be null");
-            Assert.IsNull(_robot.Direction. "Robot direction should be null");
+            Assert.IsNull(_robot.Location, "Robot location should be null");
+            Assert.AreEqual((int)_robot.Direction, -1, "Robot direction should be -1");
         }
 
         [Test]

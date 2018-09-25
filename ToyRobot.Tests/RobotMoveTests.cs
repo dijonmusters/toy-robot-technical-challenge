@@ -3,7 +3,7 @@ using ToyRobotConsole;
 
 namespace Tests
 {
-    public class Tests
+    public class RobotMoveTests
     {
         private Game _game;
         private Robot _robot;
@@ -11,7 +11,7 @@ namespace Tests
         public void Setup()
         {
             _game = new Game();
-            _robot = new Robot(_game);
+            _robot = new Robot(_game.Map);
             _robot.Place(0, 0, Direction.NORTH);
         }
 
@@ -39,7 +39,7 @@ namespace Tests
         [Test]
         public void RobotMovesEast()
         {
-            _robot.RotateRight();
+            _robot.Right();
             _robot.Move();
             int expectedX = 1;
             int expectedY = 0;
@@ -98,7 +98,7 @@ namespace Tests
         [Test]
         public void RobotRemainsInBoundaryEast()
         {
-            _robot.Place(0, 0, Direction.EAST)
+            _robot.Place(0, 0, Direction.EAST);
             _robot.Move();
             _robot.Move();
             _robot.Move();
@@ -119,7 +119,7 @@ namespace Tests
         [Test]
         public void RobotRemainsInBoundarySouth()
         {
-            _robot.Place(0, 4, Direction.SOUTH)
+            _robot.Place(0, 4, Direction.SOUTH);
             _robot.Move();
             _robot.Move();
             _robot.Move();
@@ -140,7 +140,7 @@ namespace Tests
         [Test]
         public void RobotRemainsInBoundaryWest()
         {
-            _robot.Place(4, 0, Direction.WEST)
+            _robot.Place(4, 0, Direction.WEST);
             _robot.Move();
             _robot.Move();
             _robot.Move();
