@@ -49,7 +49,7 @@ namespace ToyRobotConsole
             }
             catch(Exception e)
             {
-                Console.WriteLine("Cannot PLACE like that! Please check parameters.");
+                _game.UI.PrintMessage("Cannot PLACE like that! Please check parameters.");
             }
         }
 
@@ -80,7 +80,7 @@ namespace ToyRobotConsole
                         _game.Stop();
                         break;
                     default:
-                        Console.WriteLine(Help());
+                        _game.UI.PrintMessage(Help());
                         break;
                 }
             }

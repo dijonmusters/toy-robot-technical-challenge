@@ -30,8 +30,8 @@ namespace ToyRobotConsole
             PLACE
         }
 
-        /// <summary>Private field for map reference.</summary>
-        private List<Cell> _map;
+        /// <summary>Private field for game reference.</summary>
+        private Game _game;
 
         /// <summary>Private field for robot's current location.</summary>
         private Cell _location;
@@ -51,10 +51,10 @@ namespace ToyRobotConsole
         private bool _active;
 
         /// <summary>Robot constructor.</summary>
-        /// <param name="map">A Map parameter to manage robot's location</param>
-        public Robot(List<Cell> map)
+        /// <param name="game">A Game parameter to access game map and ui</param>
+        public Robot(Game game)
         {
-            _map = map;
+            _game = game;
             _active = false;
             _direction = (Direction) -1;
         }
@@ -67,7 +67,7 @@ namespace ToyRobotConsole
         {
             Direction last = (Direction) Enum.GetValues(typeof(Direction)).Length - 1;
             bool directionIsValid = direction >= 0 && direction <= last;
-            Cell location = _map.Find(c => c.X == x && c.Y == y);
+            Cell location = _game.Map.Find(c => c.X == x && c.Y == y);
 
             if (location != null && directionIsValid)
             {
@@ -83,7 +83,7 @@ namespace ToyRobotConsole
         public void Report()
         {
             if (IsReady())
-                Console.WriteLine($"{_location.X},{_location.Y},{_direction}");
+                _game.UI.PrintMessage($"{_location.X},{_location.Y},{_direction}");
             else
                 PrintWarning(Warning.INACTIVE);
         }
@@ -154,10 +154,18 @@ namespace ToyRobotConsole
             return _active;
         }
 
+        /// <summary>Checks if the robot is located at a specific cell</summary>
+        /// <param name="location">A Location parameter that represents coordinates</param>
+        /// <returns>A boolean value representing whether the robot is located at cell</returns>
+        public bool IsLocated(Cell location)
+        {
+            return _location == location;
+        }
+
         /// <summary>Moves the robot one cell north</summary>
         private void MoveNorth()
         {
-            Cell location = _map.Find(c => c.X == _location.X && c.Y == _location.Y + 1);
+            Cell location = _game.Map.Find(c => c.X == _location.X && c.Y == _location.Y + 1);
             if (location != null)
                 _location = location;
             else
@@ -167,7 +175,7 @@ namespace ToyRobotConsole
         /// <summary>Moves the robot one cell east</summary>
         private void MoveEast()
         {
-            Cell location = _map.Find(c => c.X == _location.X + 1 && c.Y == _location.Y);
+            Cell location = _game.Map.Find(c => c.X == _location.X + 1 && c.Y == _location.Y);
             if (location != null)
                 _location = location;
             else
@@ -177,7 +185,7 @@ namespace ToyRobotConsole
         /// <summary>Moves the robot one cell south</summary>
         private void MoveSouth()
         {
-            Cell location = _map.Find(c => c.X == _location.X && c.Y == _location.Y - 1);
+            Cell location = _game.Map.Find(c => c.X == _location.X && c.Y == _location.Y - 1);
             if (location != null)
                 _location = location;
             else
@@ -187,7 +195,7 @@ namespace ToyRobotConsole
         /// <summary>Moves the robot one cell west</summary>
         private void MoveWest()
         {
-            Cell location = _map.Find(c => c.X == _location.X - 1 && c.Y == _location.Y);
+            Cell location = _game.Map.Find(c => c.X == _location.X - 1 && c.Y == _location.Y);
             if (location != null)
                 _location = location;
             else
@@ -203,13 +211,13 @@ namespace ToyRobotConsole
             switch(warning)
             {
                 case Warning.INACTIVE:
-                    Console.WriteLine("Invalid command! Please place the robot somewhere first.");
+                    _game.UI.PrintMessage("Invalid command! Please place the robot somewhere first.");
                     break;
                 case Warning.BOUNDARY:
-                    Console.WriteLine("Whoa! Careful! You nearly fell off!");
+                    _game.UI.PrintMessage("Whoa! Careful! You nearly fell off!");
                     break;
                 case Warning.PLACE:
-                    Console.WriteLine("Don't be silly! We can't place the robot there!");
+                    _game.UI.PrintMessage("Don't be silly! We can't place the robot there!");
                     break;
             }
         }

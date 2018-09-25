@@ -11,7 +11,7 @@ namespace Tests
         public void Setup()
         {
             _game = new Game();
-            _robot = new Robot(_game.Map);
+            _robot = new Robot(_game);
         }
 
         [Test]
