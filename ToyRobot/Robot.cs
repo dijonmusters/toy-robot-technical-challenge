@@ -6,6 +6,7 @@ namespace ToyRobotConsole
     public enum Direction { NORTH, EAST, SOUTH, WEST }
     public class Robot
     {
+        private enum Warning { INACTIVE, BOUNDARY, PLACE }
         List<Cell> _map;
         Cell _location;
         Direction _direction;
@@ -21,16 +22,14 @@ namespace ToyRobotConsole
         {
             Cell location = _map.Find(c => c.X == x && c.Y == y);
 
-            if (location == null)
-            {
-                Console.WriteLine("Don't be silly! We can't place the robot there!");
-            }
-            else
+            if (location != null)
             {
                 _location = location;
                 _direction = direction;
                 Activate();
             }
+            else
+                PrintWarning(Warning.PLACE);
         }
 
         public void Report()
@@ -38,13 +37,13 @@ namespace ToyRobotConsole
             if (IsReady())
                 Console.WriteLine($"{_location.X},{_location.Y},{_direction}");
             else
-                Console.WriteLine("Please place the robot first");
+                PrintWarning(Warning.INACTIVE);
         }
 
         public void Move()
         {
             if (!IsReady())
-                Console.WriteLine("Please place the robot first");
+                PrintWarning(Warning.INACTIVE);
             else
             {
                 switch (_direction)
@@ -75,7 +74,7 @@ namespace ToyRobotConsole
                     _direction = last;
             }
             else
-                Console.WriteLine("Please place the robot first");
+                PrintWarning(Warning.INACTIVE);
         }
 
         public void Right()
@@ -88,7 +87,7 @@ namespace ToyRobotConsole
                     _direction = 0;
             }
             else
-                Console.WriteLine("Please place the robot first");
+                PrintWarning(Warning.INACTIVE);
         }
 
         private void Activate()
@@ -107,7 +106,7 @@ namespace ToyRobotConsole
             if (location != null)
                 _location = location;
             else
-                PrintWarning();
+                PrintWarning(Warning.BOUNDARY);
         }
         private void MoveSouth()
         {
@@ -115,7 +114,7 @@ namespace ToyRobotConsole
             if (location != null)
                 _location = location;
             else
-                PrintWarning();
+                PrintWarning(Warning.BOUNDARY);
         }
         private void MoveEast()
         {
@@ -123,7 +122,7 @@ namespace ToyRobotConsole
             if (location != null)
                 _location = location;
             else
-                PrintWarning();
+                PrintWarning(Warning.BOUNDARY);
         }
         private void MoveWest()
         {
@@ -131,12 +130,23 @@ namespace ToyRobotConsole
             if (location != null)
                 _location = location;
             else
-                PrintWarning();
+                PrintWarning(Warning.BOUNDARY);
         }
 
-        private void PrintWarning()
+        private void PrintWarning(Warning warning)
         {
-            Console.WriteLine("Whoa! Careful! You nearly fell off!");
+            switch(warning)
+            {
+                case Warning.INACTIVE:
+                    Console.WriteLine("Invalid command! Please place the robot somewhere first.");
+                    break;
+                case Warning.BOUNDARY:
+                    Console.WriteLine("Whoa! Careful! You nearly fell off!");
+                    break;
+                case Warning.PLACE:
+                    Console.WriteLine("Don't be silly! We can't place the robot there!");
+                    break;
+            }
         }
     }
 }
