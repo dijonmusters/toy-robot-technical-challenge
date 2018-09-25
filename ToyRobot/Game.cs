@@ -25,6 +25,9 @@ namespace ToyRobotConsole
         /// <summary>Private field for the game's playing state.</summary>
         private bool _playing;
 
+        /// <summary>Private field for the game's GUI state.</summary>
+        private bool _gui;
+
         /// <summary>Private field for the game's command processor.</summary>
         private CommandProcessor _commandProcessor;
 
@@ -46,6 +49,7 @@ namespace ToyRobotConsole
             _robot = new Robot(_map);
             _commandProcessor = new CommandProcessor(this);
             _ui = new UserInterface(this);
+            _gui = false;
         }
 
         /// <summary>
@@ -59,13 +63,17 @@ namespace ToyRobotConsole
         public void Start()
         {
             Console.WriteLine("Welcome to the Toy Robot simulator!");
+            Console.Write("Would you like a GUI? ");
+            string input = Console.ReadLine().ToUpper();
+            _gui = input == "Y" || input == "YES" || input == "T" || input == "TRUE";
             _playing = true;
             while (_playing)
             {
+                if (_gui)
+                    _ui.PrintGrid();
                 Console.Write("What would you like to do? ");
                 string command = Console.ReadLine();
                 _commandProcessor.Execute(command);
-                _ui.PrintGrid();
             }
             Console.WriteLine("Thanks for playing!");
         }
