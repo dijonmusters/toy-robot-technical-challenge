@@ -1,12 +1,13 @@
 ﻿using System;
 
-namespace ToyRobot
+namespace ToyRobotConsole
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello REA!");
+            Game game = new Game();
+            game.Start();
         }
     }
 }
