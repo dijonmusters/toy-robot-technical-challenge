@@ -17,7 +17,7 @@ namespace Tests
         [Test]
         public void InactiveRobot()
         {
-            bool actual = _robot.IsReady();
+            bool actual = _robot.Active;
             Cell actualLocation = _robot.Location;
             Assert.IsFalse(actual, $"{actual} should be False");
             Assert.IsNull(actualLocation, $"{actual} should be Null");
@@ -36,7 +36,7 @@ namespace Tests
         {
             Direction direction = Direction.NORTH;
             _robot.Place(0, 0, direction);
-            bool actual = _robot.IsReady();
+            bool actual = _robot.Active;
             int expectedPosX = 0;
             int expectedPosY = 0;
             Direction expectedDir = Direction.NORTH;
@@ -54,7 +54,7 @@ namespace Tests
         {
             Direction direction = Direction.NORTH;
             _robot.Place(100, 100, direction);
-            bool actual = _robot.IsReady();
+            bool actual = _robot.Active;
             Assert.IsFalse(actual, $"{actual} should be False");
             Assert.IsNull(_robot.Location, "Robot location should be null");
             Assert.AreEqual((int)_robot.Direction, -1, "Robot direction should be -1");
@@ -64,7 +64,7 @@ namespace Tests
         public void InvalidPlaceRobotDirection()
         {
             _robot.Place(0, 0, (Direction) 100);
-            bool actual = _robot.IsReady();
+            bool actual = _robot.Active;
             Assert.IsFalse(actual, $"{actual} should be False");
             Assert.IsNull(_robot.Location, "Robot location should be null");
             Assert.AreEqual((int)_robot.Direction, -1, "Robot direction should be -1");
