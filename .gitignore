@@ -1,6 +1,6 @@
 # Build files
-bin/
-obj/
+**/bin
+**/obj
 
 # macOS DS_STORE
 .DS_Store
