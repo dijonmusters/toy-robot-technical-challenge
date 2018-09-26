@@ -73,8 +73,18 @@
         <member name="F:ToyRobotConsole.Game._playing">
             <summary>Private field for the game's playing state.</summary>
         </member>
+        <member name="F:ToyRobotConsole.Game._gui">
+            <summary>Private field for the game's GUI state.</summary>
+        </member>
         <member name="F:ToyRobotConsole.Game._commandProcessor">
             <summary>Private field for the game's command processor.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Game._ui">
+            <summary>Private field for the game's user interface.</summary>
+        </member>
+        <member name="P:ToyRobotConsole.Game.UI">
+            <summary>Public read-only property to expose the user interface.</summary>
+            <value>Gets the value of the game's user interface</value>
         </member>
         <member name="M:ToyRobotConsole.Game.#ctor(System.Int32,System.Int32)">
             <summary>Game constructor</summary>
@@ -123,8 +133,8 @@
         <member name="F:ToyRobotConsole.Robot.Warning.PLACE">
             <summary>The requested location or direction does not exist.</summary>
         </member>
-        <member name="F:ToyRobotConsole.Robot._map">
-            <summary>Private field for map reference.</summary>
+        <member name="F:ToyRobotConsole.Robot._game">
+            <summary>Private field for game reference.</summary>
         </member>
         <member name="F:ToyRobotConsole.Robot._location">
             <summary>Private field for robot's current location.</summary>
@@ -143,9 +153,9 @@
         <member name="F:ToyRobotConsole.Robot._active">
             <summary>Private field for robot's active status.</summary>
         </member>
-        <member name="M:ToyRobotConsole.Robot.#ctor(System.Collections.Generic.List{ToyRobotConsole.Cell})">
+        <member name="M:ToyRobotConsole.Robot.#ctor(ToyRobotConsole.Game)">
             <summary>Robot constructor.</summary>
-            <param name="map">A Map parameter to manage robot's location</param>
+            <param name="game">A Game parameter to access game map and ui</param>
         </member>
         <member name="M:ToyRobotConsole.Robot.Place(System.Int32,System.Int32,ToyRobotConsole.Direction)">
             <summary>Places the robot in a location on the map and sets the direction.</summary>
@@ -172,6 +182,11 @@
             <summary>Checks if the robot is ready</summary>
             <returns>A boolean value representing the active status of the robot</returns>
         </member>
+        <member name="M:ToyRobotConsole.Robot.IsLocated(ToyRobotConsole.Cell)">
+            <summary>Checks if the robot is located at a specific cell</summary>
+            <param name="location">A Location parameter that represents coordinates</param>
+            <returns>A boolean value representing whether the robot is located at cell</returns>
+        </member>
         <member name="M:ToyRobotConsole.Robot.MoveNorth">
             <summary>Moves the robot one cell north</summary>
         </member>
@@ -189,6 +204,41 @@
             <param name="warning">
             A Warning parameter for the type of warning to be displayed
             </param>
+        </member>
+        <member name="T:ToyRobotConsole.UserInterface">
+            <summary>The User Interface is responsible for all interactions with the user.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.UserInterface._game">
+            <summary>Private field for game.</summary>
+        </member>
+        <member name="M:ToyRobotConsole.UserInterface.#ctor(ToyRobotConsole.Game)">
+            <summary>User Interface constructor</summary>
+            <param name="game">A game parameter to access game elements</param>
+        </member>
+        <member name="M:ToyRobotConsole.UserInterface.CellSymbol(ToyRobotConsole.Cell)">
+            <summary>Determines which character should be rendered from cell</summary>
+            <param name="cell">A cell parameter to determine which symbol is required</param>
+            <returns>A string value containing the cell's symbol</returns>
+        </member>
+        <member name="M:ToyRobotConsole.UserInterface.GridBorder">
+            <summary>Calculates the number of dash characters required for grid border</summary>
+            <returns>A string value containing the border characters</returns>
+        </member>
+        <member name="M:ToyRobotConsole.UserInterface.BuildGrid">
+            <summary>Calculates the entire grid world</summary>
+            <returns>A string value containing the entire grid</returns>
+        </member>
+        <member name="M:ToyRobotConsole.UserInterface.PrintGrid">
+            <summary>Prints the grid to the console</summary>
+        </member>
+        <member name="M:ToyRobotConsole.UserInterface.AskUser(System.String)">
+            <summary>Asks the user a question and returns their response</summary>
+            <param name="question">A string parameter containing the question for the user</param>
+            <returns>A string value containing the user's response</returns>
+        </member>
+        <member name="M:ToyRobotConsole.UserInterface.PrintMessage(System.String)">
+            <summary>Prints a message to the console with a consistent format</summary>
+            <param name="message">A string parameter containing the message to be printed to console</param>
         </member>
     </members>
 </doc>
