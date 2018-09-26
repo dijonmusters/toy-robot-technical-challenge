@@ -159,46 +159,6 @@ namespace ToyRobotConsole
             return Location == location;
         }
 
-        /// <summary>Moves the robot one cell north</summary>
-        private void MoveNorth()
-        {
-            Cell location = _game.Map.Find(c => c.X == _location.X && c.Y == _location.Y + 1);
-            if (location != null)
-                _location = location;
-            else
-                PrintWarning(Warning.BOUNDARY);
-        }
-
-        /// <summary>Moves the robot one cell east</summary>
-        private void MoveEast()
-        {
-            Cell location = _game.Map.Find(c => c.X == _location.X + 1 && c.Y == _location.Y);
-            if (location != null)
-                _location = location;
-            else
-                PrintWarning(Warning.BOUNDARY);
-        }
-
-        /// <summary>Moves the robot one cell south</summary>
-        private void MoveSouth()
-        {
-            Cell location = _game.Map.Find(c => c.X == _location.X && c.Y == _location.Y - 1);
-            if (location != null)
-                _location = location;
-            else
-                PrintWarning(Warning.BOUNDARY);
-        }
-
-        /// <summary>Moves the robot one cell west</summary>
-        private void MoveWest()
-        {
-            Cell location = _game.Map.Find(c => c.X == _location.X - 1 && c.Y == _location.Y);
-            if (location != null)
-                _location = location;
-            else
-                PrintWarning(Warning.BOUNDARY);
-        }
-
         /// <summary>Prints a known warning to the console</summary>
         /// <param name="warning">
         /// A Warning parameter for the type of warning to be displayed
