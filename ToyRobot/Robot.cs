@@ -33,30 +33,25 @@ namespace ToyRobotConsole
         /// <summary>Private field for game reference.</summary>
         private Game _game;
 
-        /// <summary>Private field for robot's current location.</summary>
-        private Cell _location;
-
         /// <summary>Public read-only property to expose the robot's location.</summary>
         /// <value>Gets the value of the robot's location</value>
-        public Cell Location { get { return _location; } }
-
-        /// <summary>Private field for robot's current direction.</summary>
-        private Direction _direction;
+        public Cell Location { get; private set; }
 
         /// <summary>Public read-only property to expose the robot's direction.</summary>
         /// <value>Gets the value of the robot's direction</value>
-        public Direction Direction { get { return _direction; } }
+        public Direction Direction { get; private set; }
 
-        /// <summary>Private field for robot's active status.</summary>
-        private bool _active;
+        /// <summary>Public read-only property to expose the robot's active status.</summary>
+        /// <value>Gets the value of the robot's active status</value>
+        public bool Active { get; private set; }
 
         /// <summary>Robot constructor.</summary>
         /// <param name="game">A Game parameter to access game map and ui</param>
         public Robot(Game game)
         {
             _game = game;
-            _active = false;
-            _direction = (Direction) -1;
+            Active = false;
+            Direction = (Direction) -1;
         }
 
         /// <summary>Places the robot in a location on the map and sets the direction.</summary>
@@ -71,8 +66,8 @@ namespace ToyRobotConsole
 
             if (location != null && directionIsValid)
             {
-                _location = location;
-                _direction = direction;
+                Location = location;
+                Direction = direction;
                 Activate();
             }
             else
@@ -82,32 +77,41 @@ namespace ToyRobotConsole
         /// <summary>Prints out the robot's current location and direction.</summary>
         public void Report()
         {
-            if (IsReady())
-                _game.UI.PrintMessage($"{_location.X},{_location.Y},{_direction}");
+            if (Active)
+                _game.UI.PrintMessage($"{Location.X},{Location.Y},{Direction}");
             else
                 PrintWarning(Warning.INACTIVE);
+        }
+
+        /// <summary>Moves the robot's location.</summary>
+        public void Move(Cell location)
+        {
+            if (location != null)
+                Location = location;
+            else
+                PrintWarning(Warning.BOUNDARY);
         }
 
         /// <summary>Calculates which way the robot needs to move.</summary>
         public void Move()
         {
-            if (!IsReady())
+            if (!Active)
                 PrintWarning(Warning.INACTIVE);
             else
             {
-                switch (_direction)
+                switch (Direction)
                 {
                     case Direction.NORTH:
-                        MoveNorth();
-                        break;
-                    case Direction.SOUTH:
-                        MoveSouth();
+                        Move(_game.Map.Find(c => c.X == Location.X && c.Y == Location.Y + 1));
                         break;
                     case Direction.EAST:
-                        MoveEast();
+                        Move(_game.Map.Find(c => c.X == Location.X + 1 && c.Y == Location.Y));
+                        break;
+                    case Direction.SOUTH:
+                        Move(_game.Map.Find(c => c.X == Location.X && c.Y == Location.Y - 1));
                         break;
                     case Direction.WEST:
-                        MoveWest();
+                        Move(_game.Map.Find(c => c.X == Location.X - 1 && c.Y == Location.Y));
                         break;
                 }
             }
@@ -116,12 +120,12 @@ namespace ToyRobotConsole
         /// <summary>Rotates the robot to the left</summary>
         public void Left()
         {
-            if (IsReady())
+            if (Active)
             {
                 Direction last = (Direction) Enum.GetValues(typeof(Direction)).Length - 1;
-                _direction--;
-                if (_direction < 0)
-                    _direction = last;
+                Direction--;
+                if (Direction < 0)
+                    Direction = last;
             }
             else
                 PrintWarning(Warning.INACTIVE);
@@ -130,12 +134,12 @@ namespace ToyRobotConsole
         /// <summary>Rotates the robot to the right</summary>
         public void Right()
         {
-            if (IsReady())
+            if (Active)
             {
                 Direction last = (Direction) Enum.GetValues(typeof(Direction)).Length - 1;
-                _direction++;
-                if (_direction > last)
-                    _direction = 0;
+                Direction++;
+                if (Direction > last)
+                    Direction = 0;
             }
             else
                 PrintWarning(Warning.INACTIVE);
@@ -144,14 +148,7 @@ namespace ToyRobotConsole
         /// <summary>Activates the robot so it can process commands</summary>
         private void Activate()
         {
-            _active = true;
-        }
-
-        /// <summary>Checks if the robot is ready</summary>
-        /// <returns>A boolean value representing the active status of the robot</returns>
-        public bool IsReady()
-        {
-            return _active;
+            Active = true;
         }
 
         /// <summary>Checks if the robot is located at a specific cell</summary>
@@ -159,7 +156,7 @@ namespace ToyRobotConsole
         /// <returns>A boolean value representing whether the robot is located at cell</returns>
         public bool IsLocated(Cell location)
         {
-            return _location == location;
+            return Location == location;
         }
 
         /// <summary>Moves the robot one cell north</summary>
