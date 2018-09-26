@@ -7,7 +7,7 @@ namespace ToyRobotConsole
     public class UserInterface
     {
         /// <summary>Private field for game.</summary>
-        Game _game;
+        private Game _game;
 
         /// <summary>User Interface constructor</summary>
         /// <param name="game">A game parameter to access game elements</param>
