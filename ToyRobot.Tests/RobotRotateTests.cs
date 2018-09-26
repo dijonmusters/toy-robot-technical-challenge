@@ -83,7 +83,7 @@ namespace Tests
             _robot.Rotate(Rotation.RIGHT);
             Direction expected = Direction.EAST;
             Direction actual = _robot.Direction;
-            Assert.AreNotEqual(actual, expected, $"{actual} should be the same as {expected}");
+            Assert.AreEqual(actual, expected, $"{actual} should be the same as {expected}");
         }
     }
 }
