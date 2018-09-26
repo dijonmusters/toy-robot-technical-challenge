@@ -16,6 +16,15 @@ namespace ToyRobotConsole
         WEST
     }
 
+    /// <summary>The Rotation enum contains a list of valid robot rotations.</summary>
+    public enum Rotation
+    {
+        /// <summary>Rotate robot left.</summary>
+        LEFT,
+        /// <summary>Rotate robot right.</summary>
+        RIGHT
+    }
+
     /// <summary>The Robot class contains the functionality for the game's robot.</summary>
     public class Robot
     {
@@ -117,29 +126,25 @@ namespace ToyRobotConsole
             }
         }
 
-        /// <summary>Rotates the robot to the left</summary>
-        public void Left()
+        private void CheckEnumExists()
         {
-            if (Active)
-            {
-                Direction last = (Direction) Enum.GetValues(typeof(Direction)).Length - 1;
-                Direction--;
-                if (Direction < 0)
-                    Direction = last;
-            }
-            else
-                PrintWarning(Warning.INACTIVE);
+            Direction last = (Direction) Enum.GetValues(typeof(Direction)).Length - 1;
+            if (Direction < 0)
+                Direction = last;
+            if (Direction > last)
+                Direction = 0;
         }
 
         /// <summary>Rotates the robot to the right</summary>
-        public void Right()
+        public void Rotate(Rotation rotation)
         {
             if (Active)
             {
-                Direction last = (Direction) Enum.GetValues(typeof(Direction)).Length - 1;
-                Direction++;
-                if (Direction > last)
-                    Direction = 0;
+                if (rotation == Rotation.LEFT)
+                    Direction--;
+                else
+                    Direction++;
+                CheckEnumExists();
             }
             else
                 PrintWarning(Warning.INACTIVE);

@@ -68,10 +68,10 @@ namespace ToyRobotConsole
                         _game.Robot.Move();
                         break;
                     case "LEFT":
-                        _game.Robot.Left();
+                        _game.Robot.Rotate(Rotation.LEFT);
                         break;
                     case "RIGHT":
-                        _game.Robot.Right();
+                        _game.Robot.Rotate(Rotation.RIGHT);
                         break;
                     case "REPORT":
                         _game.Robot.Report();
