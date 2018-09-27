@@ -77,7 +77,7 @@ namespace ToyRobotConsole
             {
                 Location = location;
                 Direction = direction;
-                Activate();
+                Active = true;
             }
             else
                 PrintWarning(Warning.PLACE);
@@ -148,12 +148,6 @@ namespace ToyRobotConsole
             }
             else
                 PrintWarning(Warning.INACTIVE);
-        }
-
-        /// <summary>Activates the robot so it can process commands</summary>
-        private void Activate()
-        {
-            Active = true;
         }
 
         /// <summary>Checks if the robot is located at a specific cell</summary>
