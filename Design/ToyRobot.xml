@@ -7,12 +7,6 @@
         <member name="T:ToyRobotConsole.Cell">
             <summary>A Cell is a single location containing an x and y coordinate.</summary>
         </member>
-        <member name="F:ToyRobotConsole.Cell._x">
-            <summary>Private field for x coordinate.</summary>
-        </member>
-        <member name="F:ToyRobotConsole.Cell._y">
-            <summary>Private field y coordinate.</summary>
-        </member>
         <member name="P:ToyRobotConsole.Cell.X">
             <summary>Read-only property for x coordinate.</summary>
             <value>Gets the value of x coordinate</value>
@@ -54,17 +48,9 @@
         <member name="T:ToyRobotConsole.Game">
             <summary>The Game class manages the game world.</summary>
         </member>
-        <member name="F:ToyRobotConsole.Game._map">
-            <summary>
-            Private field for the list of Cells that make up the game map.
-            </summary>
-        </member>
         <member name="P:ToyRobotConsole.Game.Map">
             <summary>Public read-only property to expose the game's map.</summary>
             <value>Gets the value of the game's map</value>
-        </member>
-        <member name="F:ToyRobotConsole.Game._robot">
-            <summary>Private field for the game's robot.</summary>
         </member>
         <member name="P:ToyRobotConsole.Game.Robot">
             <summary>Public read-only property to expose the robot.</summary>
@@ -78,9 +64,6 @@
         </member>
         <member name="F:ToyRobotConsole.Game._commandProcessor">
             <summary>Private field for the game's command processor.</summary>
-        </member>
-        <member name="F:ToyRobotConsole.Game._ui">
-            <summary>Private field for the game's user interface.</summary>
         </member>
         <member name="P:ToyRobotConsole.Game.UI">
             <summary>Public read-only property to expose the user interface.</summary>
@@ -118,6 +101,15 @@
         <member name="F:ToyRobotConsole.Direction.WEST">
             <summary>Facing west direction.</summary>
         </member>
+        <member name="T:ToyRobotConsole.Rotation">
+            <summary>The Rotation enum contains a list of valid robot rotations.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Rotation.LEFT">
+            <summary>Rotate robot left.</summary>
+        </member>
+        <member name="F:ToyRobotConsole.Rotation.RIGHT">
+            <summary>Rotate robot right.</summary>
+        </member>
         <member name="T:ToyRobotConsole.Robot">
             <summary>The Robot class contains the functionality for the game's robot.</summary>
         </member>
@@ -136,22 +128,17 @@
         <member name="F:ToyRobotConsole.Robot._game">
             <summary>Private field for game reference.</summary>
         </member>
-        <member name="F:ToyRobotConsole.Robot._location">
-            <summary>Private field for robot's current location.</summary>
-        </member>
         <member name="P:ToyRobotConsole.Robot.Location">
             <summary>Public read-only property to expose the robot's location.</summary>
             <value>Gets the value of the robot's location</value>
-        </member>
-        <member name="F:ToyRobotConsole.Robot._direction">
-            <summary>Private field for robot's current direction.</summary>
         </member>
         <member name="P:ToyRobotConsole.Robot.Direction">
             <summary>Public read-only property to expose the robot's direction.</summary>
             <value>Gets the value of the robot's direction</value>
         </member>
-        <member name="F:ToyRobotConsole.Robot._active">
-            <summary>Private field for robot's active status.</summary>
+        <member name="P:ToyRobotConsole.Robot.Active">
+            <summary>Public read-only property to expose the robot's active status.</summary>
+            <value>Gets the value of the robot's active status</value>
         </member>
         <member name="M:ToyRobotConsole.Robot.#ctor(ToyRobotConsole.Game)">
             <summary>Robot constructor.</summary>
@@ -166,38 +153,19 @@
         <member name="M:ToyRobotConsole.Robot.Report">
             <summary>Prints out the robot's current location and direction.</summary>
         </member>
+        <member name="M:ToyRobotConsole.Robot.Move(ToyRobotConsole.Cell)">
+            <summary>Moves the robot's location.</summary>
+        </member>
         <member name="M:ToyRobotConsole.Robot.Move">
             <summary>Calculates which way the robot needs to move.</summary>
         </member>
-        <member name="M:ToyRobotConsole.Robot.Left">
-            <summary>Rotates the robot to the left</summary>
-        </member>
-        <member name="M:ToyRobotConsole.Robot.Right">
+        <member name="M:ToyRobotConsole.Robot.Rotate(ToyRobotConsole.Rotation)">
             <summary>Rotates the robot to the right</summary>
-        </member>
-        <member name="M:ToyRobotConsole.Robot.Activate">
-            <summary>Activates the robot so it can process commands</summary>
-        </member>
-        <member name="M:ToyRobotConsole.Robot.IsReady">
-            <summary>Checks if the robot is ready</summary>
-            <returns>A boolean value representing the active status of the robot</returns>
         </member>
         <member name="M:ToyRobotConsole.Robot.IsLocated(ToyRobotConsole.Cell)">
             <summary>Checks if the robot is located at a specific cell</summary>
             <param name="location">A Location parameter that represents coordinates</param>
             <returns>A boolean value representing whether the robot is located at cell</returns>
-        </member>
-        <member name="M:ToyRobotConsole.Robot.MoveNorth">
-            <summary>Moves the robot one cell north</summary>
-        </member>
-        <member name="M:ToyRobotConsole.Robot.MoveEast">
-            <summary>Moves the robot one cell east</summary>
-        </member>
-        <member name="M:ToyRobotConsole.Robot.MoveSouth">
-            <summary>Moves the robot one cell south</summary>
-        </member>
-        <member name="M:ToyRobotConsole.Robot.MoveWest">
-            <summary>Moves the robot one cell west</summary>
         </member>
         <member name="M:ToyRobotConsole.Robot.PrintWarning(ToyRobotConsole.Robot.Warning)">
             <summary>Prints a known warning to the console</summary>
