@@ -39,7 +39,7 @@ namespace Tests
         [Test]
         public void RobotMovesEast()
         {
-            _robot.Right();
+            _robot.Rotate(Rotation.RIGHT);
             _robot.Move();
             int expectedX = 1;
             int expectedY = 0;

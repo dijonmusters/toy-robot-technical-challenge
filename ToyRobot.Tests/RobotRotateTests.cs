@@ -63,7 +63,7 @@ namespace Tests
         public void RobotRotates()
         {
             Direction dirBefore = _robot.Direction;
-            _robot.Left();
+            _robot.Rotate(Rotation.LEFT);
             Direction dirAfter = _robot.Direction;
             Assert.AreNotEqual(dirBefore, dirAfter, $"{dirBefore} should not be the same as {dirAfter}");
         }
@@ -71,7 +71,7 @@ namespace Tests
         [Test]
         public void RobotRotatesLeft()
         {
-            _robot.Left();
+            _robot.Rotate(Rotation.LEFT);
             Direction expected = Direction.WEST;
             Direction actual = _robot.Direction;
             Assert.AreEqual(actual, expected, $"{actual} should be the same as {expected}");
@@ -80,10 +80,10 @@ namespace Tests
         [Test]
         public void RobotRotatesRight()
         {
-            _robot.Left();
+            _robot.Rotate(Rotation.RIGHT);
             Direction expected = Direction.EAST;
             Direction actual = _robot.Direction;
-            Assert.AreNotEqual(actual, expected, $"{actual} should be the same as {expected}");
+            Assert.AreEqual(actual, expected, $"{actual} should be the same as {expected}");
         }
     }
 }
