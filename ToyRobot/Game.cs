@@ -10,9 +10,13 @@ namespace ToyRobotConsole
         /// <value>Gets the value of the game's map</value>
         public List<Cell> Map { get; }
 
+        /// <summary>Public read-only property to expose the robots.</summary>
+        /// <value>Gets the value of the game's robots</value>
+        public List<Robot> Robots { get; }
+
         /// <summary>Public read-only property to expose the robot.</summary>
         /// <value>Gets the value of the game's robot</value>
-        public Robot Robot { get; }
+        public Robot Robot { get; private set; }
 
         /// <summary>Private field for the game's playing state.</summary>
         private bool _playing;
@@ -21,7 +25,7 @@ namespace ToyRobotConsole
         private bool _gui;
 
         /// <summary>Private field for the game's command processor.</summary>
-        private CommandProcessor _commandProcessor;
+        public CommandProcessor CommandProcessor { get; private set; }
 
         /// <summary>Public read-only property to expose the user interface.</summary>
         /// <value>Gets the value of the game's user interface</value>
@@ -40,8 +44,10 @@ namespace ToyRobotConsole
                     Map.Add(new Cell(x, y));
                 }
             }
-            Robot = new Robot(this);
-            _commandProcessor = new CommandProcessor(this);
+            Robots = new List<Robot>();
+            Robots.Add(new Robot(this));
+            Robots.Add(new Robot(this));
+            CommandProcessor = new CommandProcessor(this);
             UI = new UserInterface(this);
             _gui = false;
         }
@@ -65,7 +71,7 @@ namespace ToyRobotConsole
                 if (_gui)
                     UI.PrintGrid();
                 string command = UI.AskUser("What would you like to do? ");
-                _commandProcessor.Execute(command);
+                CommandProcessor.Execute(command);
             }
             UI.PrintMessage("Thanks for playing!");
         }
@@ -74,6 +80,12 @@ namespace ToyRobotConsole
         public void Stop()
         {
             _playing = false;
+        }
+
+        /// <summary>Ends the game</summary>
+        public void Select(int robotIndex)
+        {
+            Robot = Robots[robotIndex];
         }
     }
 }

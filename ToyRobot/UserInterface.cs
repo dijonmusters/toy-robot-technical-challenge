@@ -22,7 +22,7 @@ namespace ToyRobotConsole
         private string CellSymbol(Cell cell)
         {
             string grid = " ";
-            if (_game.Robot.IsLocated(cell))
+            if (_game.Robot != null && _game.Robot.IsLocated(cell))
                 grid += "@";
             else
                 grid += " ";
