@@ -6,7 +6,6 @@ namespace Tests
     public class RobotsTests
     {
         private Game _game;
-        private Robot _robot;
         [SetUp]
         public void Setup()
         {
